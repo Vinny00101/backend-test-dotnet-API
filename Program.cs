@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
-using backend_test_dotnet_API.Model;
+using backend_test_dotnet_API.Controllers;
+using backend_test_dotnet_API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// database
 Env.Load();
 string? DBConection = Environment.GetEnvironmentVariable("StringConection");
 
-builder.Services.AddDbContextPool<AppDBContext>(options =>
+builder.Services.AddDbContextPool<AppDbContext>(options =>
     options.UseMySql(DBConection,
     ServerVersion.AutoDetect(DBConection
 )));
@@ -30,8 +32,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () =>
-{
-});
+// rotas
+app.AddEstablishmentRouter();
+app.AddVehiclesRouter();
+
 
 app.Run();
