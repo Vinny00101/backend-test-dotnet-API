@@ -1,4 +1,5 @@
 using System;
+using backend_test_dotnet_API.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_test_dotnet_API.Data;
@@ -9,4 +10,7 @@ public class AppDbContext : DbContext
     {
 
     }
+
+    public DbSet<EstablishmentTable> Estabelecimento {get; set;}
+    public DbSet<VehiclesTable> Veiculos {get; set;}
 }
